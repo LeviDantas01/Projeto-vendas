@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import br.com.projeto.jdbc.ConnectionFactory;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Funcionario;
+import br.com.projeto.view.Frmmenu;
 
 public class FuncionariosDAO {
 
@@ -221,6 +222,33 @@ public class FuncionariosDAO {
             return null;
         }
 
+    }
+
+    public void efeturaLogin(String email, String senha) {
+        try {
+
+            String sql = "SELECT * FROM tb_funcionarios WHERE email = ? and senha = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, senha);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Seja bem vindo");
+                Frmmenu tela = new Frmmenu();
+                tela.usuarioLogado = rs.getString("nome");
+                tela.setVisible(true);
+
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario não encontrado");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro" + e.getMessage());
+        }
     }
 
 }
