@@ -10,8 +10,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.projeto.jdbc.ConnectionFactory;
-import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Funcionario;
+import br.com.projeto.view.FrmLogin;
 import br.com.projeto.view.Frmmenu;
 
 public class FuncionariosDAO {
@@ -244,6 +244,7 @@ public class FuncionariosDAO {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario não encontrado");
+                new FrmLogin().setVisible(true);
             }
 
         } catch (SQLException e) {

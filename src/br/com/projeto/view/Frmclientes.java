@@ -787,10 +787,10 @@ public class Frmclientes extends javax.swing.JFrame {
                 setLocationRelativeTo(null);
         }// </editor-fold>//GEN-END:initComponents
 
-        private void txtcidadeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtcidadeActionPerformed
-        }// GEN-LAST:event_txtcidadeActionPerformed
+        private void txtcidadeActionPerformed(java.awt.event.ActionEvent evt) {
+        }
 
-        private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnbuscaActionPerformed
+        private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {
 
                 String nome = txtnome.getText();
                 Clientes obj = new Clientes();
@@ -942,16 +942,16 @@ public class Frmclientes extends javax.swing.JFrame {
 
         }
 
-        private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton4ActionPerformed
+        private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
                 Clientes obj = new Clientes();
                 obj.setId(Integer.parseInt(txtcodigo.getText()));
 
                 ClientesDAO dao = new ClientesDAO();
                 dao.excluirCliente(obj);
                 new Utlis().LimpaTela(painel_dados);
-        }// GEN-LAST:event_jButton4ActionPerformed
+        }
 
-        private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtpesquisaKeyPressed
+        private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {
 
                 String nome = "%" + txtpesquisa.getText() + "%";
 
@@ -979,13 +979,11 @@ public class Frmclientes extends javax.swing.JFrame {
                         });
                 }
 
-        }// GEN-LAST:event_txtpesquisaKeyPressed
+        }
 
-        private void btnnovoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnnovoActionPerformed
-
+        private void btnnovoActionPerformed(java.awt.event.ActionEvent evt) {
                 new Utlis().LimpaTela(painel_dados);
-
-        }// GEN-LAST:event_btnnovoActionPerformed
+        }
 
         public static void main(String args[]) {
 
