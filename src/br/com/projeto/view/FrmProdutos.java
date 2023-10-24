@@ -1,14 +1,42 @@
 package br.com.projeto.view;
 
+import java.awt.Color;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import br.com.projeto.dao.FornecedoresDAO;
+import br.com.projeto.dao.FuncionariosDAO;
+import br.com.projeto.dao.ProdutosDAO;
+import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Fornecedores;
+import br.com.projeto.model.Funcionario;
+import br.com.projeto.model.Produtos;
+import br.com.projeto.utils.Utlis;
 
 public class FrmProdutos extends javax.swing.JFrame {
 
+        public void listar() {
+                ProdutosDAO dao = new ProdutosDAO();
+                List<Produtos> lista = dao.listaProdutos();
+                DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
+                dados.setNumRows(0);
+
+                for (Produtos p : lista) {
+                        dados.addRow(new Object[] {
+                                        p.getId(),
+                                        p.getDescricao(),
+                                        p.getPreco(),
+                                        p.getQtdEsoque(),
+                                        p.getFornecedor().getNome()
+                        });
+                }
+        }
+
         public FrmProdutos() {
                 initComponents();
+                this.getContentPane().setBackground(Color.WHITE);
         }
 
         @SuppressWarnings("unchecked")
@@ -445,49 +473,145 @@ public class FrmProdutos extends javax.swing.JFrame {
 
                 pack();
                 setLocationRelativeTo(null);
-        }// </editor-fold>//GEN-END:initComponents
+        }
 
-        private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnbuscaActionPerformed
+        private void btnbuscaActionPerformed(java.awt.event.ActionEvent evt) {
+                String nome = txtdescricao.getText();
+                Produtos obj = new Produtos();
+                ProdutosDAO dao = new ProdutosDAO();
 
-        }// GEN-LAST:event_btnbuscaActionPerformed
+                obj = dao.consultaPorNome(nome);
+                cbfornecedor.removeAllItems();
 
-        private void btnpesquisarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnpesquisarActionPerformed
+                if (obj.getDescricao() != null) {
+                        txtcodigo.setText(String.valueOf(obj.getId()));
+                        txtdescricao.setText(obj.getDescricao());
+                        txtpreco.setText(String.valueOf(obj.getPreco()));
+                        txtqtdestoque.setText(String.valueOf(obj.getQtdEsoque()));
 
-        }// GEN-LAST:event_btnpesquisarActionPerformed
+                        Fornecedores f = new Fornecedores();
+                        FornecedoresDAO fdao = new FornecedoresDAO();
 
-        private void txtdescricaoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtdescricaoActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_txtdescricaoActionPerformed
+                        f = fdao.consultaPorNome(obj.getFornecedor().getNome());
 
-        private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnsalvarActionPerformed
+                        cbfornecedor.getModel().setSelectedItem(f);
+                } else {
+                        JOptionPane.showMessageDialog(null, "Produto não encontrado");
+                }
 
-        }// GEN-LAST:event_btnsalvarActionPerformed
+        }
 
-        private void formWindowActivated(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowActivated
+        private void btnpesquisarActionPerformed(java.awt.event.ActionEvent evt) {
+                String nome = "%" + txtpesquisa.getText() + "%";
 
-        }// GEN-LAST:event_formWindowActivated
+                ProdutosDAO dao = new ProdutosDAO();
+                List<Produtos> lista = dao.listarProdutosPorNome(nome);
+                DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
+                dados.setNumRows(0);
 
-        private void tabelaProdutosMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tabelaProdutosMouseClicked
+                for (Produtos p : lista) {
+                        dados.addRow(new Object[] {
+                                        p.getId(),
+                                        p.getDescricao(),
+                                        p.getPreco(),
+                                        p.getQtdEsoque(),
+                                        p.getFornecedor().getNome()
+                        });
+                }
+        }
 
-        }// GEN-LAST:event_tabelaProdutosMouseClicked
+        private void txtdescricaoActionPerformed(java.awt.event.ActionEvent evt) {
 
-        private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+        }
 
-        }// GEN-LAST:event_jButton3ActionPerformed
+        private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {
+                Produtos obj = new Produtos();
+                obj.setDescricao(txtdescricao.getText());
+                obj.setPreco(Double.parseDouble(txtpreco.getText()));
+                obj.setQtdEsoque(Integer.parseInt(txtqtdestoque.getText()));
 
-        private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton4ActionPerformed
+                Fornecedores f = new Fornecedores();
+                f = (Fornecedores) cbfornecedor.getSelectedItem();
+                obj.setFornecedor(f);
 
-        }// GEN-LAST:event_jButton4ActionPerformed
+                ProdutosDAO dao = new ProdutosDAO();
+                dao.cadastrar(obj);
+        }
 
-        private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_txtpesquisaKeyPressed
+        private void formWindowActivated(java.awt.event.WindowEvent evt) {
+                listar();
+        }
 
-        }// GEN-LAST:event_txtpesquisaKeyPressed
+        private void tabelaProdutosMouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1.setSelectedIndex(0);
 
-        private void btnnovoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnnovoActionPerformed
+                txtcodigo.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 0).toString());
+                txtdescricao.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 1).toString());
+                txtpreco.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 2).toString());
+                txtqtdestoque.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 3).toString());
 
-        }// GEN-LAST:event_btnnovoActionPerformed
+                Fornecedores f = new Fornecedores();
+                FornecedoresDAO dao = new FornecedoresDAO();
+                f = dao.consultaPorNome(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 4).toString());
 
-        private void cbfornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {// GEN-FIRST:event_cbfornecedorAncestorAdded
+                cbfornecedor.removeAllItems();
+                cbfornecedor.getModel().setSelectedItem(f);
+
+        }
+
+        private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+                Produtos obj = new Produtos();
+                obj.setId(Integer.parseInt(txtcodigo.getText()));
+                obj.setDescricao(txtdescricao.getText());
+                obj.setPreco(Double.parseDouble(txtpreco.getText()));
+                obj.setQtdEsoque(Integer.parseInt(txtqtdestoque.getText()));
+
+                Fornecedores f = new Fornecedores();
+                f = (Fornecedores) cbfornecedor.getSelectedItem();
+
+                obj.setFornecedor(f);
+
+                ProdutosDAO dao = new ProdutosDAO();
+                dao.alterarProduto(obj);
+
+                new Utlis().LimpaTela(painel_dados);
+        }
+
+        private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+                Produtos obj = new Produtos();
+                obj.setId(Integer.parseInt(txtcodigo.getText()));
+
+                ProdutosDAO dao = new ProdutosDAO();
+                dao.excluirProduto(obj);
+
+                new Utlis().LimpaTela(painel_dados);
+        }
+
+        private void txtpesquisaKeyPressed(java.awt.event.KeyEvent evt) {
+
+                String nome = "%" + txtpesquisa.getText() + "%";
+
+                ProdutosDAO dao = new ProdutosDAO();
+                List<Produtos> lista = dao.listarProdutosPorNome(nome);
+                DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
+                dados.setNumRows(0);
+
+                for (Produtos p : lista) {
+                        dados.addRow(new Object[] {
+                                        p.getId(),
+                                        p.getDescricao(),
+                                        p.getPreco(),
+                                        p.getQtdEsoque(),
+                                        p.getFornecedor().getNome()
+                        });
+                }
+        }
+
+        private void btnnovoActionPerformed(java.awt.event.ActionEvent evt) {
+
+        }
+
+        private void cbfornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {
 
                 FornecedoresDAO dao = new FornecedoresDAO();
 
@@ -498,15 +622,21 @@ public class FrmProdutos extends javax.swing.JFrame {
                         cbfornecedor.addItem(f);
                 }
 
-        }// GEN-LAST:event_cbfornecedorAncestorAdded
+        }
 
-        private void cbfornecedorActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbfornecedorActionPerformed
+        private void cbfornecedorActionPerformed(java.awt.event.ActionEvent evt) {
 
-        }// GEN-LAST:event_cbfornecedorActionPerformed
+        }
 
-        private void cbfornecedorMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_cbfornecedorMouseClicked
+        private void cbfornecedorMouseClicked(java.awt.event.MouseEvent evt) {
+                FornecedoresDAO dao = new FornecedoresDAO();
+                List<Fornecedores> listaFornecedores = dao.listarFornecedor();
+                cbfornecedor.removeAllItems();
 
-        }// GEN-LAST:event_cbfornecedorMouseClicked
+                for (Fornecedores f : listaFornecedores) {
+                        cbfornecedor.addItem(f);
+                }
+        }
 
         public static void main(String args[]) {
 
@@ -546,7 +676,6 @@ public class FrmProdutos extends javax.swing.JFrame {
                 });
         }
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JButton btnbusca;
         private javax.swing.JButton btnnovo;
         private javax.swing.JButton btnpesquisar;
@@ -572,5 +701,5 @@ public class FrmProdutos extends javax.swing.JFrame {
         private javax.swing.JTextField txtpesquisa;
         private javax.swing.JTextField txtpreco;
         private javax.swing.JTextField txtqtdestoque;
-        // End of variables declaration//GEN-END:variables
+
 }
