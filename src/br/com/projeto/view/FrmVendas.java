@@ -4,12 +4,19 @@ import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.table.DefaultTableModel;
+
 import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.dao.ProdutosDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Produtos;
 
 public class FrmVendas extends javax.swing.JFrame {
+
+        double total, preco, subtotal;
+        int qtd;
+
+        DefaultTableModel carrinho;
 
         public FrmVendas() {
                 initComponents();
@@ -557,7 +564,10 @@ public class FrmVendas extends javax.swing.JFrame {
         }
 
         private void btnpagamentoActionPerformed(java.awt.event.ActionEvent evt) {
-
+                FrmPagamentos telap = new FrmPagamentos();
+                telap.txttotal.setText(String.valueOf(total));
+                telap.setVisible(true);
+                this.dispose();
         }
 
         private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -589,7 +599,23 @@ public class FrmVendas extends javax.swing.JFrame {
         }
 
         private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {
+                qtd = Integer.parseInt(txtqtd.getText());
+                preco = Double.parseDouble(txtpreco.getText());
 
+                subtotal = qtd * preco;
+
+                total += subtotal;
+                txttotal.setText(String.valueOf(total));
+
+                carrinho = (DefaultTableModel) tabelaItens.getModel();
+
+                carrinho.addRow(new Object[] {
+                                txtcodigo.getText(),
+                                txtdescricao.getText(),
+                                txtqtd.getText(),
+                                txtpreco.getText(),
+                                subtotal
+                });
         }
 
         private void btnbuscaclienteActionPerformed(java.awt.event.ActionEvent evt) {
@@ -689,5 +715,4 @@ public class FrmVendas extends javax.swing.JFrame {
         private javax.swing.JTextField txtpreco;
         private javax.swing.JTextField txtqtd;
         private javax.swing.JTextField txttotal;
-        // End of variables declaration//GEN-END:variables
 }
