@@ -7,7 +7,7 @@ public class ConnectionFactory {
 
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:mysql://127.0.0.1/bdvendas", "usuariocurso", "123");
+            return DriverManager.getConnection("jdbc:mysql://127.0.0.1/bdvendas?autoReconnect=true&useSSL=false", "usuariocurso", "123");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

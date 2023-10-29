@@ -3,9 +3,9 @@ package br.com.projeto.model;
 public class Vendas {
 
     private int id;
-    private Clientes clientesId;
+    private Clientes cliente;
     private String dataVenda;
-    private int tatalVenda;
+    private double tatalVenda;
     private String obs;
 
     
@@ -17,12 +17,12 @@ public class Vendas {
         this.id = id;
     }
 
-    public Clientes getClientesId() {
-        return clientesId;
+    public Clientes getCliente() {
+        return cliente;
     }
 
-    public void setClientesId(Clientes clientesId) {
-        this.clientesId = clientesId;
+    public void setCliente(Clientes clientesId) {
+        this.cliente = clientesId;
     }
 
     public String getDataVenda() {
@@ -33,11 +33,11 @@ public class Vendas {
         this.dataVenda = dataVenda;
     }
 
-    public int getTatalVenda() {
+    public double getTatalVenda() {
         return tatalVenda;
     }
 
-    public void setTatalVenda(int tatalVenda) {
+    public void setTatalVenda(double tatalVenda) {
         this.tatalVenda = tatalVenda;
     }
 

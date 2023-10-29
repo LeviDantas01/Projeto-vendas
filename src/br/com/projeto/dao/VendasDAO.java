@@ -21,19 +21,17 @@ public class VendasDAO {
     public void cadastrarVenda(Vendas obj) {
 
         try {
-            String sql = "INSERT INTO tb_vendas (cliente_id, data_venda, total_venda, observacoes)";
+            String sql = "INSERT INTO tb_vendas (cliente_id,data_venda,total_venda,observacoes) VALUES (?,?,?,?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setInt(1, obj.getClientesId().getId());
+            ps.setInt(1, obj.getCliente().getId());
             ps.setString(2, obj.getDataVenda());
             ps.setDouble(3, obj.getTatalVenda());
             ps.setString(4, obj.getObs());
 
             ps.execute();
             ps.close();
-
-            JOptionPane.showMessageDialog(null, "Venda Registrada.");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "erro." + e);

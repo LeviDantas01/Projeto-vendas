@@ -1,6 +1,22 @@
 package br.com.projeto.view;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import br.com.projeto.dao.ItemVendaDAO;
+import br.com.projeto.dao.VendasDAO;
+import br.com.projeto.model.Clientes;
+import br.com.projeto.model.ItemVenda;
+import br.com.projeto.model.Produtos;
+import br.com.projeto.model.Vendas;
+
 public class FrmPagamentos extends javax.swing.JFrame {
+
+        Clientes cliente = new Clientes();
+        DefaultTableModel carrinho;
 
         public FrmPagamentos() {
                 initComponents();
@@ -10,8 +26,6 @@ public class FrmPagamentos extends javax.swing.JFrame {
                 txttroco.setText("0");
 
         }
-
-        @SuppressWarnings("unchecked")
 
         private void initComponents() {
 
@@ -255,10 +269,38 @@ public class FrmPagamentos extends javax.swing.JFrame {
 
                 totalVenda = Double.parseDouble(txttotal.getText());
                 totalPago = pCartao + pCheque + pDinheiro;
-
                 troco = totalPago - totalVenda;
-
                 txttroco.setText(String.valueOf(troco));
+
+                Vendas vendas = new Vendas();
+                vendas.setCliente(cliente);
+
+                Date now = new Date();
+                SimpleDateFormat dataUs = new SimpleDateFormat("yyyy-MM-dd");
+                String d = dataUs.format(now);
+                vendas.setDataVenda(d);
+
+                vendas.setTatalVenda(totalVenda);
+                vendas.setObs(txtobs.getText());
+
+                VendasDAO vendasDAO = new VendasDAO();
+                vendasDAO.cadastrarVenda(vendas);
+                vendas.setId(vendasDAO.retornaUltimaVenda());
+
+                for (int i = 0; i < carrinho.getRowCount() - 1; i++) {
+                        Produtos produtos = new Produtos();
+                        ItemVenda itemVenda = new ItemVenda();
+                        
+                        itemVenda.setVendas(vendas);
+                        produtos.setId(Integer.parseInt(carrinho.getValueAt(i, 0).toString()));
+                        itemVenda.setProdutos(produtos);
+                        itemVenda.setQtd(Integer.parseInt(carrinho.getValueAt(i, 2).toString()));
+                        itemVenda.setSubTotal(Double.parseDouble(carrinho.getValueAt(i, 4).toString()));
+
+                        ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+                        itemVendaDAO.cadastraItem(itemVenda);
+                }
+                JOptionPane.showMessageDialog(null, "Venda registrada");
 
         }
 

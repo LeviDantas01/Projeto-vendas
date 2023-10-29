@@ -180,26 +180,20 @@ public class ProdutosDAO {
     public Produtos consultaPorCodigo(int codigo) {
         try {
 
-            String sql = "SELECT p.id, p.descricao, p.preco, p.qtd_estoque, f.nome FROM tb_produtos AS p INNER JOIN tb_fornecedores as f ON(p.for_id = f.id) WHERE p.id = ?";
+            String sql = "SELECT * FROM tb_produtos WHERE id = ?";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, codigo);
             ResultSet rs = ps.executeQuery();
 
             Produtos obj = new Produtos();
-            Fornecedores f = new Fornecedores();
 
             if (rs.next()) {
 
-                obj.setId(rs.getInt("p.id"));
-                obj.setDescricao(rs.getString("p.descricao"));
-                obj.setPreco(rs.getDouble("p.preco"));
-                obj.setQtdEsoque(rs.getInt("p.qtd_estoque"));
-
-                f.setNome(rs.getString("f.nome"));
-
-                obj.setFornecedor(f);
-
+                obj.setId(rs.getInt("id"));
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPreco(rs.getDouble("preco"));
+                obj.setQtdEsoque(rs.getInt("qtd_estoque"));
             }
 
             return obj;

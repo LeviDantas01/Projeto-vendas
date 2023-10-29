@@ -14,7 +14,7 @@ public class Frmmenu extends javax.swing.JFrame {
     }
 
    
-    @SuppressWarnings("unchecked")
+
     private void initComponents() {
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/fundo.jpg"));

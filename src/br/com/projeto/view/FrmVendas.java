@@ -13,6 +13,7 @@ import br.com.projeto.model.Produtos;
 
 public class FrmVendas extends javax.swing.JFrame {
 
+        Clientes obj = new Clientes();
         double total, preco, subtotal;
         int qtd;
 
@@ -22,7 +23,6 @@ public class FrmVendas extends javax.swing.JFrame {
                 initComponents();
         }
 
-        @SuppressWarnings("unchecked")
         private void initComponents() {
 
                 jPanel1 = new javax.swing.JPanel();
@@ -554,7 +554,7 @@ public class FrmVendas extends javax.swing.JFrame {
 
                 pack();
                 setLocationRelativeTo(null);
-        }// </editor-fold>//GEN-END:initComponents
+        }
 
         private void formWindowActivated(java.awt.event.WindowEvent evt) {
                 Date now = new Date();
@@ -566,6 +566,8 @@ public class FrmVendas extends javax.swing.JFrame {
         private void btnpagamentoActionPerformed(java.awt.event.ActionEvent evt) {
                 FrmPagamentos telap = new FrmPagamentos();
                 telap.txttotal.setText(String.valueOf(total));
+                telap.cliente = obj;
+                telap.carrinho = carrinho;
                 telap.setVisible(true);
                 this.dispose();
         }
@@ -619,7 +621,6 @@ public class FrmVendas extends javax.swing.JFrame {
         }
 
         private void btnbuscaclienteActionPerformed(java.awt.event.ActionEvent evt) {
-                Clientes obj = new Clientes();
                 ClientesDAO dao = new ClientesDAO();
 
                 obj = dao.consultaPorCpf(txtcpf.getText());
@@ -636,9 +637,7 @@ public class FrmVendas extends javax.swing.JFrame {
 
         private void txtcpfKeyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                        Clientes obj = new Clientes();
                         ClientesDAO dao = new ClientesDAO();
-
                         obj = dao.consultaPorCpf(txtcpf.getText());
                         txtnome.setText(obj.getNome());
                 }
