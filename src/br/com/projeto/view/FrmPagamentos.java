@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.projeto.dao.ItemVendaDAO;
+import br.com.projeto.dao.ProdutosDAO;
 import br.com.projeto.dao.VendasDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.ItemVenda;
@@ -287,15 +288,22 @@ public class FrmPagamentos extends javax.swing.JFrame {
                 vendasDAO.cadastrarVenda(vendas);
                 vendas.setId(vendasDAO.retornaUltimaVenda());
 
-                for (int i = 0; i < carrinho.getRowCount() - 1; i++) {
+                for (int i = 0; i < carrinho.getRowCount(); i++) {
+                        int qtdEstoque, qtdComprada, qtdAtualizada;
                         Produtos produtos = new Produtos();
+                        ProdutosDAO pdao = new ProdutosDAO();
                         ItemVenda itemVenda = new ItemVenda();
-                        
+
                         itemVenda.setVendas(vendas);
                         produtos.setId(Integer.parseInt(carrinho.getValueAt(i, 0).toString()));
                         itemVenda.setProdutos(produtos);
                         itemVenda.setQtd(Integer.parseInt(carrinho.getValueAt(i, 2).toString()));
                         itemVenda.setSubTotal(Double.parseDouble(carrinho.getValueAt(i, 4).toString()));
+
+                        qtdEstoque = pdao.retornaEstoqueAtual(produtos.getId());
+                        qtdComprada = Integer.parseInt(carrinho.getValueAt(i, 2).toString());
+                        qtdAtualizada = qtdEstoque - qtdComprada;
+                        pdao.baixaEstoque(produtos.getId(), qtdAtualizada);
 
                         ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
                         itemVendaDAO.cadastraItem(itemVenda);

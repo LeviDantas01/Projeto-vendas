@@ -204,4 +204,36 @@ public class ProdutosDAO {
         }
     }
 
+    public void baixaEstoque(int id, int qtdNova) {
+        try {
+            String sql = "UPDATE tb_produtos SET qtd_estoque=? where id=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, qtdNova);
+            ps.setInt(2, id);
+            ps.execute();
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "erro " + e);
+        }
+    }
+
+    public int retornaEstoqueAtual(int id) {
+        try {
+            int qtdEstoque = 0;
+
+            String sql = "SELECT qtd_estoque FROM tb_produtos WHERE id=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                qtdEstoque = (rs.getInt("qtd_estoque"));
+            }
+            return qtdEstoque;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
