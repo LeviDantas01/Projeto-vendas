@@ -7,11 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.projeto.dao.FornecedoresDAO;
-import br.com.projeto.dao.FuncionariosDAO;
 import br.com.projeto.dao.ProdutosDAO;
-import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Fornecedores;
-import br.com.projeto.model.Funcionario;
 import br.com.projeto.model.Produtos;
 import br.com.projeto.utils.Utlis;
 

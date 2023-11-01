@@ -68,7 +68,8 @@ public class VendasDAO {
         try {
             List<Vendas> lista = new ArrayList<>();
 
-            String sql = "SELECT v.id, date_format(v.data_venda, '%d/%m/%Y') AS data_formatada, c.nome, v.total_venda, v.observacoes " +
+            String sql = "SELECT v.id, date_format(v.data_venda, '%d/%m/%Y') AS data_formatada, c.nome, v.total_venda, v.observacoes "
+                    +
                     "FROM tb_vendas AS v INNER JOIN tb_clientes AS c ON(v.cliente_id = c.id) WHERE v.data_venda BETWEEN ? AND ?";
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -96,6 +97,25 @@ public class VendasDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "erro" + e);
             return null;
+        }
+    }
+
+    public double vendaTotalPorData(LocalDate dataVenda) {
+        try {
+            double totalVenda = 0;
+            String sql = "SELECT SUM(total_venda) AS total FROM tb_vendas WHERE data_venda = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, dataVenda.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                totalVenda = rs.getDouble("total");
+            }
+            return totalVenda;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

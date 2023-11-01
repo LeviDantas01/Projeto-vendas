@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import br.com.projeto.jdbc.ConnectionFactory;
 import br.com.projeto.model.Funcionario;
 import br.com.projeto.view.FrmLogin;
-import br.com.projeto.view.Frmmenu;
+import br.com.projeto.view.FrmMenu;
 
 public class FuncionariosDAO {
 
@@ -236,11 +236,21 @@ public class FuncionariosDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Seja bem vindo");
-                Frmmenu tela = new Frmmenu();
-                tela.usuarioLogado = rs.getString("nome");
-                tela.setVisible(true);
+                if (rs.getString("nivel_acesso").equals("Admin")) {
+                    JOptionPane.showMessageDialog(null, "Seja bem vindo");
+                    FrmMenu tela = new FrmMenu();
+                    tela.usuarioLogado = rs.getString("nome");
+                    tela.setVisible(true);
+                } else if (rs.getString("nivel_acesso").equals("Usuário")) {
+                    JOptionPane.showMessageDialog(null, "Seja bem vindo");
+                    FrmMenu tela = new FrmMenu();
+                    tela.usuarioLogado = rs.getString("nome");
 
+                    tela.menu_posicao.setVisible(false);
+                    tela.menu_controlevendas.setVisible(false);
+
+                    tela.setVisible(true);
+                }
 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario não encontrado");

@@ -3,26 +3,24 @@ package br.com.projeto.view;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-
-public class Frmmenu extends javax.swing.JFrame {
+public class FrmMenu extends javax.swing.JFrame {
 
     public String usuarioLogado;
 
-    public Frmmenu() {
+    public FrmMenu() {
         initComponents();
     }
-
-   
 
     private void initComponents() {
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/fundo.jpg"));
 
         Image image = icon.getImage();
-        painel_desktop = new javax.swing.JDesktopPane(){
-            public void paintComponent(Graphics g){
-                g.drawImage(image, 0,0, getWidth(),getHeight(),this);
+        painel_desktop = new javax.swing.JDesktopPane() {
+            public void paintComponent(Graphics g) {
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
         };
         jPanel1 = new javax.swing.JPanel();
@@ -63,43 +61,44 @@ public class Frmmenu extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblusuario)
-                .addContainerGap(607, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblusuario)
+                                .addContainerGap(607, Short.MAX_VALUE)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblusuario)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblusuario)
+                                        .addComponent(jLabel1))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         painel_desktop.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout painel_desktopLayout = new javax.swing.GroupLayout(painel_desktop);
         painel_desktop.setLayout(painel_desktopLayout);
         painel_desktopLayout.setHorizontalGroup(
-            painel_desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                painel_desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         painel_desktopLayout.setVerticalGroup(
-            painel_desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_desktopLayout.createSequentialGroup()
-                .addGap(0, 392, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+                painel_desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                painel_desktopLayout.createSequentialGroup()
+                                        .addGap(0, 392, Short.MAX_VALUE)
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/clientes.png"))); // NOI18N
         jMenu1.setText("Clientes");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setAccelerator(
+                javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/clientes.png"))); // NOI18N
         jMenuItem1.setText("Controle de clientes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -219,81 +218,86 @@ public class Frmmenu extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel_desktop)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(painel_desktop));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel_desktop)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(painel_desktop));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         lblusuario.setText(usuarioLogado);
         this.setVisible(true);
 
-    }//GEN-LAST:event_formWindowActivated
+    }
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmLogin tLogin = new FrmLogin();
+        this.dispose();
+        tLogin.setVisible(true);
+    }
 
+    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }
 
-    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
-        // TODO add your handling code here:
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {
 
-    }//GEN-LAST:event_jMenu7ActionPerformed
+        int op;
 
-    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+        op = JOptionPane.showConfirmDialog(null, "Quer mesmo sair ?");
+        if (op == 0) {
+            System.exit(0);
+        }
 
+    }
 
-    }//GEN-LAST:event_jMenu7MouseClicked
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmProdutos tMenu = new FrmProdutos();
+        tMenu.jTabbedPane1.setSelectedIndex(1);
+        tMenu.setVisible(true);
+    }
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
+        Frmclientes tClientes = new Frmclientes();
+        tClientes.setVisible(true);
+    }
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmFuncionarios tFuncionarios = new FrmFuncionarios();
+        tFuncionarios.setVisible(true);
+    }
 
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmFornecedores tFornecedores = new FrmFornecedores();
+        tFornecedores.setVisible(true);
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    }
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmVendas fVendas = new FrmVendas();
+        fVendas.setVisible(true);
+    }
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menu_posicaoActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmTotalVenda tTovalVenda = new FrmTotalVenda();
+        tTovalVenda.setVisible(true);
+    }
 
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void menu_controlevendasActionPerformed(java.awt.event.ActionEvent evt) {
+        FrmHistorico tHistorico = new FrmHistorico();
+        tHistorico.setVisible(true);
+    }
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void menu_posicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_posicaoActionPerformed
-
-    }//GEN-LAST:event_menu_posicaoActionPerformed
-
-    private void menu_controlevendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_controlevendasActionPerformed
-
-    }//GEN-LAST:event_menu_controlevendasActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -302,28 +306,22 @@ public class Frmmenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Frmmenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Frmmenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Frmmenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frmmenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Frmmenu().setVisible(true);
+                new FrmMenu().setVisible(true);
             }
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -345,5 +343,5 @@ public class Frmmenu extends javax.swing.JFrame {
     public javax.swing.JMenuItem menu_controlevendas;
     public javax.swing.JMenuItem menu_posicao;
     private javax.swing.JDesktopPane painel_desktop;
-    // End of variables declaration//GEN-END:variables
+
 }

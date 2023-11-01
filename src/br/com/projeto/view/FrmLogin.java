@@ -164,7 +164,12 @@ public class FrmLogin extends javax.swing.JFrame {
     }
 
     private void btnsairActionPerformed(java.awt.event.ActionEvent evt) {
+        int op;
 
+        op = JOptionPane.showConfirmDialog(null, "Quer mesmo sair ?");
+        if (op == 0) {
+            System.exit(0);
+        }
     }
 
     public static void main(String args[]) {
