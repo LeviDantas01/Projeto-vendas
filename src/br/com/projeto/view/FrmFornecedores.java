@@ -8,10 +8,8 @@ import java.awt.event.KeyEvent;
 
 import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.dao.FornecedoresDAO;
-import br.com.projeto.dao.FuncionariosDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Fornecedores;
-import br.com.projeto.model.Funcionario;
 import br.com.projeto.utils.Utlis;
 
 public class FrmFornecedores extends javax.swing.JFrame {
@@ -46,7 +44,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
 
         }
 
-        @SuppressWarnings("unchecked")
+      
         private void initComponents() {
 
                 jPanel1 = new javax.swing.JPanel();

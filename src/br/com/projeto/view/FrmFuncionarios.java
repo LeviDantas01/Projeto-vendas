@@ -51,7 +51,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         }
 
-        @SuppressWarnings("unchecked")
+        
 
         private void initComponents() {
 

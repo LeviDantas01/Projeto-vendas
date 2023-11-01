@@ -6,7 +6,7 @@ public class FrmDetalheVenda extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
+
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();

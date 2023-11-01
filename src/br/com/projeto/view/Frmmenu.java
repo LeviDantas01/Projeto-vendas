@@ -1,5 +1,6 @@
 package br.com.projeto.view;
 
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -225,10 +226,10 @@ public class FrmMenu extends javax.swing.JFrame {
                         .addComponent(painel_desktop));
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setExtendedState(Frame.MAXIMIZED_BOTH);
         lblusuario.setText(usuarioLogado);
         this.setVisible(true);
 

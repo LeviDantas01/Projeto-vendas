@@ -45,7 +45,7 @@ public class Frmclientes extends javax.swing.JFrame {
                 this.getContentPane().setBackground(Color.WHITE);
         }
 
-        @SuppressWarnings("unchecked")
+   
         private void initComponents() {
 
                 jPanel1 = new javax.swing.JPanel();
